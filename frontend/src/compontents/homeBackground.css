@@ -9,7 +9,6 @@
     min-width: 240px;
     min-height: 800px;
     height: 100%;
-    background-color: red;
     position: absolute;
     z-index: 0;
     display: flex;
@@ -65,4 +64,9 @@
 }
 .discover:hover {
     background-color: #477935;
+    color: var(--text-hover);
+}
+#discover {
+    text-decoration: none;
+    color: white;
 }

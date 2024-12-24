@@ -39,13 +39,15 @@
     align-items: center;
     height: 48px;
 }
-.menu-item {
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-.menu-item:hover {
+#nav-a:hover {
     color: var(--text-hover);
+    transition: all 0.2s ease-in-out;
 }
 .logo-text {
     font-size: 48px;
+}
+#nav-a {
+    outline: none;
+    text-decoration: none;
+    color: white;
 }

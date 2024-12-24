@@ -9,7 +9,7 @@ function HomeBackground() {
                 <div className="divider"></div>
                 <div className="text-secondary">A PLACE TO SHARE YOUR TASTE. RECOOK IS A RECIPE SHARING PLATFORM</div>
             </div>
-            <button className="discover">DISCOVER</button>
+            <button className="discover"><a href="/recipes" id="discover">DISCOVER</a></button>
         </div>
     )
 }
