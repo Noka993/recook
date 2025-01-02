@@ -1,9 +1,11 @@
-
+import Header from '../../compontents/Header';
+import AboutBackground from '../../compontents/AboutBackground'
 function About(){
 
     return (
         <>
-            <h1>About</h1>
+            <Header />
+            <AboutBackground />
         </>
     )
 }

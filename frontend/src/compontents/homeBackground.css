@@ -1,6 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inria+Serif:wght@300;400;700&display=swap');
 
+body {
+    overflow: hidden;
+}
 .home-background{
     background-image: url('meal1.jpg');
     background-size: cover;
@@ -31,13 +34,6 @@
 .text-main {
     font-size: 112px;
     font-weight: bold;
-}
-.divider {
-    width: 700px;
-    height: 7px;
-    min-height: 7px;
-    background-color: #E2C689;
-    margin: 25px 0 25px;
 }
 .text-secondary {
     text-align: center;

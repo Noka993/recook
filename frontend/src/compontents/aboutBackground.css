@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inria+Serif:wght@300;400;700&display=swap');
+
+.about-background {
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+.about-section {
+    background-color: var(--secondary-color);
+    flex: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding-top: 5%;
+}
+.banner {
+    background-color: rgb(116, 78, 56);
+    height: 100%;
+    width: auto;
+    flex: 2;
+}
+.section-header {
+    background-color: var(--background-secondary);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 160px;
+    width: 900px;
+    font-family: 'Inter', sans-serif;
+    font-weight: bold;
+    font-size: 82px;
+    min-width: 600px;
+    min-height: 120px;
+    margin-bottom: 60px;
+}
+.divider {
+    width: 900px;
+    margin: 0;
+}
+.section-content {
+    width: 900px;
+    text-align: center;
+    font-family: 'Inria Serif', serif;
+    font-size: 32px;
+}
+.btn-default {
+    margin-top: 45px;
+}
