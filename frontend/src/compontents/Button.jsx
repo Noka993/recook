@@ -1,4 +1,4 @@
-import './button.css'
+import '../assets/button.css'
 
 function Button(props) {
     return (

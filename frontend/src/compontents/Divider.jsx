@@ -1,4 +1,4 @@
-import './divider.css'
+import '../assets/divider.css'
 function Divider() {
     return (
         <div className="divider"></div>

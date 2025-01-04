@@ -1,5 +1,5 @@
 import Divider from './Divider'
-import './homeBackground.css'
+import '../assets/homeBackground.css'
 
 function HomeBackground() {
     return (

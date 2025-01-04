@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inria+Serif:wght@300;400;700&display=swap');
+
+.register-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    padding-top: 50px;
+    flex-direction: column;
+}
+#register-link, #login-link {
+    font-family: 'Inria Serif', serif;
+    color: #A7A7A7;
+    transition: all 0.2s ease-in-out;
+    font-weight: bold;
+}
+#register-link:hover, #login-link:hover {
+    color: #8f8f8f;
+}

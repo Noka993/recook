@@ -6,7 +6,6 @@ import '../assets/aboutBackground.css'
 function AboutBackground() {
     return (
         <div className="about-background">
-            <div className="banner"></div>
             <div className="about-section">
                 <div className="about-header">ABOUT US</div>
                 <Divider />
@@ -25,6 +24,7 @@ function AboutBackground() {
                 <Divider />
                 <Button link="/about" text="LEARN MORE" id="about-button"/>
             </div>
+            <div className="banner"></div>
         </div>
     )
 }

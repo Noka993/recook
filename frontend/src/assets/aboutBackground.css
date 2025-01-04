@@ -21,7 +21,7 @@
     width: auto;
     flex: 2;
 }
-.section-header {
+.about-header {
     background-color: var(--background-secondary);
     color: white;
     display: flex;

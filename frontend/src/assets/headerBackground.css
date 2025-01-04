@@ -1,0 +1,12 @@
+.header-background {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 76px;
+    color: white;
+    font-weight: bold;
+    background-color: brown;
+    height: 225px;
+    padding-top: 85px;
+    font-family: 'Inter', sans-serif;
+}
