@@ -21,21 +21,6 @@
     width: auto;
     flex: 2;
 }
-.about-header {
-    background-color: var(--background-secondary);
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 160px;
-    width: 900px;
-    font-family: 'Inter', sans-serif;
-    font-weight: bold;
-    font-size: 82px;
-    min-width: 600px;
-    min-height: 120px;
-    margin-bottom: 60px;
-}
 .divider {
     width: 900px;
     margin: 0;
@@ -48,4 +33,10 @@
 }
 .btn-default {
     margin-top: 45px;
+}
+.message-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
 }

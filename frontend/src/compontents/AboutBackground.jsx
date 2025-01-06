@@ -1,6 +1,6 @@
 import Divider from './Divider'
 import Button from './Button'
-import SectionHeader from './HeaderBackground'
+import SectionHeader from './SectionHeader'
 import '../assets/aboutBackground.css'
 
 function AboutBackground() {
@@ -8,7 +8,7 @@ function AboutBackground() {
         <div className="about-background">
             <div className="banner"></div>
             <div className="about-section">
-                <div className="about-header">ABOUT US</div>
+                <SectionHeader text="ABOUT US" />
                 <Divider />
                 <div className="section-content">
                     <p>

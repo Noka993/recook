@@ -1,31 +1,28 @@
 import Divider from './Divider'
 import Button from './Button'
-import SectionHeader from './HeaderBackground'
+import SectionHeader from './SectionHeader'
+import InputField from './InputField'
+import IconTextSection from './IconTextSection'
 import '../assets/aboutBackground.css'
 
-function AboutBackground() {
+function ContactBackground() {
     return (
         <div className="about-background">
             <div className="about-section">
-                <div className="about-header">ABOUT US</div>
+                <SectionHeader text="CONTACT" />
+                <IconTextSection icon="/assets/email.png" text="7lO4l@example.com" />
+                <IconTextSection icon="/assets/phone.png" text="123-456-789" />
                 <Divider />
-                <div className="section-content">
-                    <p>
-                        This website was made with love by Miłosz Malinowski.
-                        I am a Computer Science student at Warsaw University of Life Sciences.
-                        It is an attempt to showcase my web development skills
-                    </p>
+                <div className='message-form'>
+                    <InputField type="text" placeholder="NAME" />
+                    <InputField type="email" placeholder="EMAIL" />
+                    <InputField type="text" placeholder="MESSAGE" />
 
-                    <p>
-                        This is my final project for Harvard’s CS50 course.
-                        I used the following technologies: <b>React </b>with pure <b>CSS, Flask, SQLAlchemy</b>
-                    </p>
+                    <Button link="#" text="SEND" id="send-button"/>
                 </div>
-                <Divider />
-                <Button link="/about" text="LEARN MORE" id="about-button"/>
             </div>
             <div className="banner"></div>
         </div>
     )
 }
-export default AboutBackground
+export default ContactBackground

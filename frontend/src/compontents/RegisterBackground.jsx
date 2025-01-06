@@ -1,12 +1,12 @@
 import '../assets/registerBackground.css'
 import Button from './Button'
 import Divider from './Divider'
-import SectionHeader from './HeaderBackground'
+import HeaderBackground from './HeaderBackground'
 import InputField from './InputField'
 function registerBackground() {
     return (
         <div className="register-section">
-            <SectionHeader text="SIGN UP" />
+            <HeaderBackground text="SIGN UP" />
             <div className="register-form">
                 <InputField type="text" placeholder="USERNAME" />
                 <InputField type="password" placeholder="PASSWORD" />

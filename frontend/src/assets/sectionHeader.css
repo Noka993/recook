@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+.section-header {
+    background-color: var(--background-secondary);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 160px;
+    width: 900px;
+    font-family: 'Inter', sans-serif;
+    font-weight: bold;
+    font-size: 82px;
+    min-width: 600px;
+    min-height: 120px;
+    margin-bottom: 60px;
+}
