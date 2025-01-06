@@ -1,12 +1,12 @@
 import '../assets/loginBackground.css'
 import Button from './Button'
 import Divider from './Divider'
-import SectionHeader from './HeaderBackground'
+import HeaderBackground from './HeaderBackground'
 import InputField from './InputField'
 function loginBackground() {
     return (
         <div className="login-section">
-            <SectionHeader text="LOGIN" />
+            <HeaderBackground text="LOGIN" />
             <div className="login-form">
                 <InputField type="text" placeholder="USERNAME" />
                 <InputField type="password" placeholder="PASSWORD" />
