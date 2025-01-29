@@ -1,7 +1,9 @@
 from config import db
+from sqlalchemy.dialects.postgresql import UUID
+import uuid
 
 class User(db.Model):
-    user_id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     username = db.Column(db.String(80), unique=True, nullable=False)
     password = db.Column(db.String(120), nullable=False)
 
@@ -12,7 +14,7 @@ class User(db.Model):
         }
     
 class Recipe(db.Model):
-    recipe_id = db.column(db.Integer, primary_key=True)
+    recipe_id = db.column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     title = db.Column(db.String(80), nullable=False)
     description = db.Column(db.String(120), nullable=False)
     ingredients = db.Column(db.String(120), nullable=False)
@@ -34,7 +36,7 @@ class Recipe(db.Model):
         }
     
 class UserRecipe(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'), nullable=False)
     recipe_id = db.Column(db.Integer, db.ForeignKey('recipe.recipe_id'), nullable=False)
 
@@ -47,7 +49,7 @@ class UserRecipe(db.Model):
     
 
 class Favorite(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'), nullable=False)
     recipe_id = db.Column(db.Integer, db.ForeignKey('recipe.recipe_id'), nullable=False)
 
