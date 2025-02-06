@@ -5,11 +5,11 @@ import uuid
 class User(db.Model):
     user_id = db.Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     username = db.Column(db.String(80), unique=True, nullable=False)
-    password = db.Column(db.String(120), nullable=False)
+    password_hash = db.Column(db.String(120), nullable=False)
 
     def to_json(self):
         return {
-            'user_id': self.id,
+            'userId': self.id,
             'username': self.username
         }
     
@@ -25,14 +25,14 @@ class Recipe(db.Model):
 
     def to_json(self):
         return {
-            'recipe_id': self.recipe_id,
+            'recipeId': self.recipe_id,
             'title': self.title,
             'description': self.description,
             'ingredients': [i for i in self.ingredients.split(',')],
             'difficulty': self.difficulty,
             'instructions': self.instructions,
             'image': self.image,
-            'number_of_favorites': self.number_of_favorites
+            'numberOfFavorites': self.number_of_favorites
         }
     
 class UserRecipe(db.Model):
@@ -43,8 +43,8 @@ class UserRecipe(db.Model):
     def to_json(self):
         return {
             'id': self.id,
-            'user_id': self.user_id,
-            'recipe_id': self.recipe_id
+            'userId': self.user_id,
+            'recipeId': self.recipe_id
         }
     
 
@@ -56,6 +56,6 @@ class Favorite(db.Model):
     def to_json(self):
         return {
             'id': self.id,
-            'user_id': self.user_id,
-            'recipe_id': self.recipe_id
+            'userId': self.user_id,
+            'recipeId': self.recipe_id
         }
