@@ -1,7 +1,7 @@
 from flask import request, jsonify
 from helpers import response_message
 from config import app, db
-from models import Recipe, User
+from models import Recipe, User, Favorite
 
 @app.route('/recipes', method=['GET'])
 def get_recipes():
@@ -129,7 +129,51 @@ def create_user():
         return response_message(str(e))
     
     return response_message("User created successfully", 201)
+
+@app.route('/delete_user/<int:user_id>', methods=['DELETE'])
+def delete_user(user_id):
+    user = User.query.get(user_id)
+
+    if not user:
+        return response_message('User not found', 404)
     
+    try:
+        db.session.delete(user)
+        db.session.commit()    
+    except Exception as e:
+        return response_message(str(e))
+    
+    return response_message('User deleted', 200)
+
+@app.route('/add_favorite', methods=['POST'])
+def add_favorite():
+    required_keys = ["userId", "recipeId"]
+
+    data = request.json 
+
+    favorite_data = {key: data.get(key) for key in required_keys}
+
+    missing_fields = [key for key, value in favorite_data.items() if not value]
+
+    if missing_fields:
+        return response_message(f"Missing required fields: {', '.join(missing_fields)}", 400)
+
+    new_favorite = Favorite(
+        user_id=favorite_data["userId"],
+        recipe_id=favorite_data["recipeId"]
+    )
+    
+    favorite_db = Favorite.query.filter_by(user_id=favorite_data["userId"], recipe_id=favorite_data["recipeId"]).first()
+    if favorite_db:
+        return response_message("Favorite already exists", 400)
+    
+    try:
+        db.session.add(new_favorite)
+        db.session.commit()
+    except Exception as e:
+        return response_message(str(e))
+    
+    return response_message("Favorite added successfully", 201)
     
 if __name__ == '__main__':
     with app.app_context():
