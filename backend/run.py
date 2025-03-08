@@ -1,3 +1,4 @@
+from flask import Flask
 from app.config import app, db
 from app.api.recipe_routes import recipe_bp
 from app.api.user_routes import user_bp
