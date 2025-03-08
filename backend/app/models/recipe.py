@@ -1,4 +1,4 @@
-from config import db
+from app.config import db
 from sqlalchemy.dialects.postgresql import UUID
 import uuid
 
@@ -16,7 +16,7 @@ class Recipe(db.Model):
 
     def to_json(self):
         return {
-            'recipeId': self.recipe_id,
+            'recipeId': str(self.recipe_id),
             'title': self.title,
             'description': self.description,
             'ingredients': [i.strip() for i in self.ingredients.split(',')],

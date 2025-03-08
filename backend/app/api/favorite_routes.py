@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 from app.services.favorite_service import FavoriteService
-from helpers.response_message import response_message
+from app.helpers.response_message import response_message
 
 favorite_bp = Blueprint('favorites', __name__)
 

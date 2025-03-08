@@ -1,5 +1,5 @@
 from app.models import Recipe
-from config import db
+from app.config import db
 
 class RecipeService:
     

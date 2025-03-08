@@ -1,5 +1,5 @@
 from app.models import Favorite
-from config import db
+from app.config import db
 
 class FavoriteService:
     

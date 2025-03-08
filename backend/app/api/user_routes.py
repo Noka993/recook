@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 from app.services.user_service import UserService
-from helpers.response_message import response_message
+from app.helpers.response_message import response_message
 
 user_bp = Blueprint('users', __name__)
 

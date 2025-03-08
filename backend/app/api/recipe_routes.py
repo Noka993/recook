@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
 from app.services.recipe_service import RecipeService
-from helpers.response_message import response_message
+from app.helpers.response_message import response_message
 
 recipe_bp = Blueprint('recipes', __name__)
 
