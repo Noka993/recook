@@ -27,7 +27,7 @@ def delete_recipe(recipe_id):
     result, status = RecipeService.delete_recipe(recipe_id)
     return response_message(result, status)
 
-@recipe_bp.route('/<int:recipe_id>', methods=['PATCH'])
+@recipe_bp.route('/<int:recipe_id>', methods=['PUT'])
 def update_recipe(recipe_id):
     data = request.json
     result, status = RecipeService.update_recipe(recipe_id, data)

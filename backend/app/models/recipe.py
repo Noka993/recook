@@ -1,18 +1,19 @@
 from app.config import db
 from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy import Column, String, Integer
 import uuid
 
 class Recipe(db.Model):
     __tablename__ = 'recipe'
 
-    recipe_id = db.Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
-    title = db.Column(db.String(80), nullable=False)
-    description = db.Column(db.String(120), nullable=False)
-    ingredients = db.Column(db.String(120), nullable=False)
-    difficulty = db.Column(db.String(120), nullable=False)  # Consider using Enum in the future
-    instructions = db.Column(db.String(300), nullable=False)
-    image = db.Column(db.String(120), nullable=False)
-    number_of_favorites = db.Column(db.Integer, nullable=False, default=0)
+    recipe_id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    title = Column(String(80), nullable=False)
+    description = Column(String(120), nullable=False)
+    ingredients = Column(String(120), nullable=False)
+    difficulty = Column(String(120), nullable=False)  # Consider using Enum in the future
+    instructions = Column(String(300), nullable=False)
+    image = Column(String(120), nullable=False)
+    number_of_favorites = Column(Integer, nullable=False, default=0)
 
     def to_json(self):
         return {
