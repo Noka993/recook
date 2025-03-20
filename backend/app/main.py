@@ -3,6 +3,10 @@ from helpers import response_message
 from config import app, db
 from models import Recipe, User, Favorite
 
+# TODO: Test all routes with Postman
+# TODO: Add authentication
+# TODO: Add proper database relationships
+
 @app.route('/recipes', method=['GET'])
 def get_recipes():
     recipes = Recipe.query.all()

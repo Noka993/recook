@@ -1,6 +1,7 @@
 from app.config import db
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy import Column, ForeignKey
+from sqlalchemy.orm import relationship # TODO: Add relationships
 import uuid
 
 class Favorite(db.Model):
