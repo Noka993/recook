@@ -1,6 +1,7 @@
-import '../assets/header.css'
+import React from 'react';
+import '../assets/header.css';
 
-function Header() {
+const Header: React.FC = () => {
     return (
         <div className="nav-bar">
             <div className="menu-logo">
@@ -13,6 +14,7 @@ function Header() {
                 <div className="menu-item"><a id="nav-a" href='/login'>LOGIN</a></div>
             </div>
         </div>
-    )
+    );
 }
-export default Header
+
+export default Header;

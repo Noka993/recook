@@ -1,9 +1,11 @@
-import '../assets/registerBackground.css'
-import Button from './Button'
-import Divider from './Divider'
-import HeaderBackground from './HeaderBackground'
-import InputField from './InputField'
-function registerBackground() {
+import React from 'react';
+import '../assets/registerBackground.css';
+import Button from './Button';
+import Divider from './Divider';
+import HeaderBackground from './HeaderBackground';
+import InputField from './InputField';
+
+const RegisterBackground: React.FC = () => {
     return (
         <div className="register-section">
             <HeaderBackground text="SIGN UP" />
@@ -16,6 +18,7 @@ function registerBackground() {
                 <a href='/login' id="login-link">Already have an account? Login</a>
             </div>
         </div>
-    )
+    );
 }
-export default registerBackground
+
+export default RegisterBackground;

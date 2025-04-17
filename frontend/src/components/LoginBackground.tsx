@@ -1,9 +1,11 @@
-import '../assets/loginBackground.css'
-import Button from './Button'
-import Divider from './Divider'
-import HeaderBackground from './HeaderBackground'
-import InputField from './InputField'
-function loginBackground() {
+import React from 'react';
+import '../assets/loginBackground.css';
+import Button from './Button';
+import Divider from './Divider';
+import HeaderBackground from './HeaderBackground';
+import InputField from './InputField';
+
+const LoginBackground: React.FC = () => {
     return (
         <div className="login-section">
             <HeaderBackground text="LOGIN" />
@@ -15,6 +17,7 @@ function loginBackground() {
                 <a href='/register' id="register-link">Don't have an account? Register</a>
             </div>
         </div>
-    )
+    );
 }
-export default loginBackground
+
+export default LoginBackground;
