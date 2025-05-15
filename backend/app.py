@@ -1,12 +1,14 @@
 from app.config import app, db
-from app.api.recipe_routes import recipes
-from app.api.user_routes import users
-from app.api.favorite_routes import favorites
+
+from app.api import login
+from app.api import favorite, recipe, user
 
 
-app.register_blueprint(recipes, url_prefix='/recipes')
-app.register_blueprint(users, url_prefix='/users')
-app.register_blueprint(favorites, url_prefix='/favorites')
+app.register_blueprint(recipe.recipes, url_prefix='/recipes')
+app.register_blueprint(user.user, url_prefix='/user')
+app.register_blueprint(favorite.favorites, url_prefix='/favorites')
+app.register_blueprint(login.login, url_prefix='/login')
+app.register_blueprint(login.register, url_prefix='/register')
 
 if __name__ == '__main__':
     with app.app_context():

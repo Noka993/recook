@@ -9,10 +9,10 @@ class RecipeIngredient(db.Model):
 
     ri_id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     ingredient_id = Column(
-        UUID(as_uuid=True), ForeignKey("ingredients.ingredient_id"), nullable=False
+        UUID(as_uuid=True), ForeignKey("ingredients.ingredient_id", ondelete="CASCADE"), nullable=False
     )
     recipe_id = Column(
-        UUID(as_uuid=True), ForeignKey("recipe.recipe_id"), nullable=False
+        UUID(as_uuid=True), ForeignKey("recipe.recipe_id", ondelete="CASCADE"), nullable=False
     )
 
     ingredient = db.relationship(

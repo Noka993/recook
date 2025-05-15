@@ -8,9 +8,9 @@ class FavoriteRecipe(db.Model):
     __tablename__ = "favorite_recipe"
 
     favorite_id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
-    user_id = Column(UUID(as_uuid=True), ForeignKey("user.user_id"), nullable=False)
+    user_id = Column(UUID(as_uuid=True), ForeignKey("user.user_id", ondelete="CASCADE"), nullable=False)
     recipe_id = Column(
-        UUID(as_uuid=True), ForeignKey("recipe.recipe_id"), nullable=False
+        UUID(as_uuid=True), ForeignKey("recipe.recipe_id", ondelete="CASCADE"), nullable=False
     )
 
     user = db.relationship(
