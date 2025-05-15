@@ -1,6 +1,7 @@
 from flask import Blueprint, request
 from app.models import Recipe, UserRecipe, Ingredients, RecipeIngredient
 from app.helpers.response_message import response_message
+from app.helpers.schemas import RecipesOut, RecipeOut, IngredientsOut
 from app.config import db
 from flask_jwt_extended import jwt_required, get_jwt_identity
 import uuid
@@ -11,20 +12,22 @@ recipes = Blueprint("recipes", __name__)
 @recipes.route("/", methods=["GET"])
 def get_recipes():
     recipes = Recipe.query.all()
-    return [recipe.to_json() for recipe in recipes], 200
+    validated_recipes = RecipesOut.model_validate({"recipes": recipes})
+    return validated_recipes.model_dump_json(), 200
 
 
 @recipes.route("/<uuid:recipe_id>", methods=["GET"])
-def get_recipe(recipe_id):
-    print(recipe_id)
+def get_recipe(recipe_id: uuid.UUID):
     recipe = Recipe.query.get(recipe_id)
     if not recipe:
         return response_message("Recipe not found", 404)
-    return recipe.to_json(), 200
+    validated_recipe = RecipeOut.model_validate(recipe)
+    return validated_recipe.model_dump_json(), 200
+
 
 # TODO: Implement adding ingredients to recipe
 @recipes.route("/<uuid:recipe_id>/ingredients", methods=["GET"])
-def get_recipe_ingredients(recipe_id):
+def get_recipe_ingredients(recipe_id: uuid.UUID):
     recipe_ingredients = (
         RecipeIngredient.query.join(
             Ingredients, Ingredients.ingredient_id == RecipeIngredient.ingredient_id
@@ -32,10 +35,8 @@ def get_recipe_ingredients(recipe_id):
         .filter(RecipeIngredient.recipe_id == recipe_id)
         .all()
     )
-    return [
-        recipe_ingredient.ingredient.to_json()
-        for recipe_ingredient in recipe_ingredients
-    ], 200
+    validated_ingredients = IngredientsOut.model_validate({"ingredients": recipe_ingredients})
+    return validated_ingredients.model_dump_json(), 200
 
 
 @recipes.route("/", methods=["POST"])
@@ -51,7 +52,8 @@ def create_recipe():
         new_user_recipe = UserRecipe(user_id=user_id, recipe_id=new_recipe.recipe_id)
         db.session.add(new_user_recipe)
         db.session.commit()
-        return new_recipe.to_json(), 201
+        validated_recipe = RecipeOut.model_validate(new_recipe)
+        return validated_recipe.model_dump_json(), 201
     except Exception as e:
         db.session.rollback()
         return str(e), 400
@@ -59,7 +61,7 @@ def create_recipe():
 
 @recipes.route("/<uuid:recipe_id>", methods=["DELETE"])
 @jwt_required()
-def delete_recipe(recipe_id):
+def delete_recipe(recipe_id: uuid.UUID):
     recipe = Recipe.query.get(recipe_id)
     if not recipe:
         return "Recipe not found", 404
@@ -82,7 +84,7 @@ def delete_recipe(recipe_id):
 
 @recipes.route("/<uuid:recipe_id>", methods=["PUT"])
 @jwt_required()
-def update_recipe(recipe_id):
+def update_recipe(recipe_id: uuid.UUID):
     data = request.json
     recipe = Recipe.query.get(recipe_id)
     if not recipe:
@@ -99,7 +101,8 @@ def update_recipe(recipe_id):
         setattr(recipe, key, value)
     try:
         db.session.commit()
-        return recipe.to_json(), 200
+        validated_recipe = RecipeOut.model_validate(recipe)
+        return validated_recipe.model_dump_json(), 200
     except Exception as e:
         db.session.rollback()
         return str(e), 400

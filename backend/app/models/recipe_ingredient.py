@@ -16,10 +16,10 @@ class RecipeIngredient(db.Model):
     )
 
     ingredient = db.relationship(
-        "Ingredients", backref=db.backref("user_recipe", cascade="all, delete-orphan")
+        "Ingredients", backref=db.backref("recipe_ingredient", cascade="all, delete-orphan")
     )
     recipe = db.relationship(
-        "Recipe", backref=db.backref("user_recipe", cascade="all, delete-orphan")
+        "Recipe", backref=db.backref("recipe_ingredient", cascade="all, delete-orphan")
     )
 
     def to_json(self):
