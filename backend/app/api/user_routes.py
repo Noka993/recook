@@ -1,16 +1,33 @@
 from flask import Blueprint, request
-from app.services.user_service import UserService
+from app.models import User
 from app.helpers.response_message import response_message
+from app.config import db
 
-user_bp = Blueprint('users', __name__)
+users = Blueprint("users", __name__)
 
-@user_bp.route('/', methods=['POST'])
-def create_user():
-    data = request.json
-    result, status = UserService.create_user(data)
-    return response_message(result, status)
 
-@user_bp.route('/<int:user_id>', methods=['DELETE'])
+@users.route("/<uuid:user_id>", methods=["DELETE"])
 def delete_user(user_id):
-    result, status = UserService.delete_user(user_id)
-    return response_message(result, status)
+    user = User.query.get(user_id)
+    if not user:
+        return response_message("User not found", 404)
+    try:
+        db.session.delete(user)
+        db.session.commit()
+        return 204
+    except Exception as e:
+        return str(e), 400
+
+
+@users.route("/<uuid:user_id>", methods=["PUT"])
+def update_password(user_id):
+    data = request.json
+    user = User.query.get(user_id)
+    if not user:
+        return response_message("User not found", 404)
+    user.password_hash = data.get("passwordHash")
+    try:
+        db.session.commit()
+        return "Password updated", 200
+    except Exception as e:
+        return str(e), 400
