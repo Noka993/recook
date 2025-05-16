@@ -1,13 +1,30 @@
 from flask import Blueprint, request
 from app.models import User, UserRecipe, Recipe
 from app.helpers.response_message import response_message
-from app.helpers.schemas import RecipesOut
+from app.helpers.schemas import RecipesOut, UserOut
 from app.config import db
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from werkzeug.security import check_password_hash, generate_password_hash
 import uuid
 
 user = Blueprint("user", __name__)
+
+
+@user.route("/list", methods=["GET"])
+@jwt_required()
+def get_users():
+    search = request.args.get("search")
+    limit = request.args.get("limit", type=int)
+    offset = request.args.get("offset", type=int)
+    query = User.query
+    if search:
+        query = query.filter(User.username.ilike(f"%{search}%"))
+    if limit:
+        query = query.limit(limit)
+    if offset:
+        query = query.offset(offset)
+    users = query.all()
+    return {"users": [user.to_json() for user in users]}, 200
 
 
 @user.route("/", defaults={"user_id": None}, methods=["DELETE"])
@@ -70,5 +87,7 @@ def get_user_recipes():
         .filter(UserRecipe.user_id == user_id)
         .all()
     )
-    validated_recipes = RecipesOut.model_validate({"recipes": [recipe.recipe for recipe in user_recipes]})
+    validated_recipes = RecipesOut.model_validate(
+        {"recipes": [recipe.recipe for recipe in user_recipes]}
+    )
     return validated_recipes.model_dump_json(), 200

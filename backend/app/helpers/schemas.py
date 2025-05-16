@@ -1,5 +1,4 @@
 from pydantic import BaseModel, ConfigDict
-from datetime import datetime
 from uuid import UUID
 
 
@@ -45,12 +44,6 @@ class FavoriteOut(BaseModel):
     favorite_id: UUID
     user_id: UUID
     recipe_id: UUID
-
-    model_config = ConfigDict(from_attributes=True)
-
-
-class FavoritesOut(BaseModel):
-    favorites: list[FavoriteOut]
 
     model_config = ConfigDict(from_attributes=True)
 

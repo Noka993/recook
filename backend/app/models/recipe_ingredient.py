@@ -25,6 +25,6 @@ class RecipeIngredient(db.Model):
     def to_json(self):
         return {
             "id": self.ri_id,
-            "ingredientId": self.ingredient_id,
-            "recipeId": self.recipe_id,
+            "ingredient_id": self.ingredient_id,
+            "recipe_id": self.recipe_id,
         }

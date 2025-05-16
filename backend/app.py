@@ -10,11 +10,9 @@ app.register_blueprint(favorite.favorites, url_prefix='/favorites')
 app.register_blueprint(login.login, url_prefix='/login')
 app.register_blueprint(login.register, url_prefix='/register')
 app.register_blueprint(ingredients.ingredients, url_prefix='/ingredients')
+app.register_blueprint(login.logout, url_prefix='/logout')
 
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
     app.run(debug=True)
-
-# TODO: Pydantic scheme validation
-# TODO: Error handling, change all functions to return html codes

@@ -4,7 +4,9 @@ from app.models import FavoriteRecipe, Recipe
 from app.helpers.response_message import response_message
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from app.config import db
-from app.helpers.schemas import FavoriteOut, FavoritesOut
+from app.helpers.schemas import FavoriteOut, RecipesOut, RecipeOut
+from sqlalchemy import or_
+
 
 favorites = Blueprint("favorites", __name__)
 
@@ -13,13 +15,36 @@ favorites = Blueprint("favorites", __name__)
 @jwt_required()
 def get_favorites():
     user_id = uuid.UUID(get_jwt_identity())
-    favorites = (
-        FavoriteRecipe.query.join(Recipe, Recipe.recipe_id == FavoriteRecipe.recipe_id)
-        .filter_by(user_id=user_id)
-        .all()
-    )
-    validated_favorites = FavoritesOut.model_validate(
-        {"favorites": [favorite.recipe for favorite in favorites]}
+    search = request.args.get("search")
+    limit = request.args.get("limit", type=int)
+    offset = request.args.get("offset", type=int)
+
+    # Load user's favorites and ensure related recipes are eagerly loaded
+    query = FavoriteRecipe.query.join(
+        Recipe, Recipe.recipe_id == FavoriteRecipe.recipe_id
+    ).filter(FavoriteRecipe.user_id == user_id)
+
+    if search:
+        query = query.filter(
+            or_(
+                Recipe.title.ilike(f"%{search}%"),
+                Recipe.instructions.ilike(f"%{search}%"),
+                Recipe.description.ilike(f"%{search}%"),
+                Recipe.difficulty.ilike(f"%{search}%")
+            )
+        )
+    if limit:
+        query = query.limit(limit)
+    if offset:
+        query = query.offset(offset)
+
+    favorites = query.all()
+    validated_favorites = RecipesOut.model_validate(
+        {
+            "recipes": [
+                RecipeOut.model_validate(favorite.recipe) for favorite in favorites
+            ]
+        }
     )
     return validated_favorites.model_dump_json(), 200
 

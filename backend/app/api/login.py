@@ -1,14 +1,15 @@
-from flask_jwt_extended import create_access_token
+from flask_jwt_extended import create_access_token, get_jwt, jwt_required, get_jwt_identity, verify_jwt_in_request
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask import Blueprint, request
 from app.models.user import User
 from app.helpers.response_message import response_message
 from flask import jsonify
-from app.config import db
+from app.config import db, redis_blocklist
 
 
 login = Blueprint("login", __name__)
 register = Blueprint("register", __name__)
+logout = Blueprint("logout", __name__)
 
 @login.route("/", methods=["POST"])
 def login_user():
@@ -21,7 +22,6 @@ def login_user():
 
     if not username or not password:
         return response_message("Username and password are required", 400)
-
 
     user = User.query.filter_by(username=username).first()
     if not user or not check_password_hash(user.password_hash, password):
@@ -55,3 +55,11 @@ def register_user():
         return str(e), 400
     
     return response_message("User registered successfully", 201)
+
+
+@logout.route("/", methods=["POST"])
+@jwt_required()
+def logout_user():
+    jti = get_jwt()["jti"]
+    redis_blocklist.set(jti, "", ex=259200)
+    return response_message("User logged out", 200)

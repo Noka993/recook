@@ -14,16 +14,16 @@ class FavoriteRecipe(db.Model):
     )
 
     user = db.relationship(
-        "User", backref=db.backref("favorites", lazy=True, cascade="all, delete-orphan")
+        "User", backref=db.backref("favorites", cascade="all, delete-orphan")
     )
     recipe = db.relationship(
         "Recipe",
-        backref=db.backref("favorited_by", lazy=True, cascade="all, delete-orphan"),
+        backref=db.backref("favorited_by", cascade="all, delete-orphan"),
     )
 
     def to_json(self):
         return {
-            "favoriteId": str(self.favorite_id),
-            "userId": str(self.user_id),
-            "recipeId": str(self.recipe_id),
+            "favorite_id": str(self.favorite_id),
+            "user_id": str(self.user_id),
+            "recipe_id": str(self.recipe_id),
         }
