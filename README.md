@@ -1,12 +1,12 @@
-# Recook
+# 🥘 Recook
 **Recook** is a full-stack web application that provides users with personalized recipe recommendations based on available ingredients.
 
-## Features
+## ✨ Features
 
-- Responsive React frontend
+- Responsive React frontend (In Progress)
 - Flask REST API backend
 
-## Project Structure
+## 📁 Project Structure
 
 ```
 recook/
@@ -16,7 +16,7 @@ recook/
 └── README.md
 ```
 
-## Getting Started
+## 🚀 Getting Started
 
 ### Prerequisites
 
@@ -93,10 +93,10 @@ The backend uses Flask-SQLAlchemy with a SQLite database (`database.db`) by defa
 -   `Ingredients`: Stores ingredient details.
 -   `RecipeIngredient`: Maps recipes to their ingredients.
 
-## Authentication
+## 🔐 Authentication
 
 User authentication is handled using Flask-JWT-Extended. Access tokens are generated upon login and are required for protected routes. A Redis-based blocklist is implemented for token revocation on logout.
 
-## License
+## 📄 License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
